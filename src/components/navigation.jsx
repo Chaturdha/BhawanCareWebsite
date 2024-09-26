@@ -35,11 +35,31 @@ export const Navigation = ({ setActiveSection, features }) => {
             <span className="icon-bar"></span>
           </button>
           <Link className="navbar-brand page-scroll" to="/#page-top" onClick={() => setActiveSection('home')}>
-            <img
-              src="/img/portfolio/logo.png"
-              alt="Logo"
-              style={{ height: '70px' }}
-            />
+            <div
+              style={{ position: 'relative', textAlign: 'center' }}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                alert('Due to privacy reasons, you are not allowed to download this logo.');
+              }}
+            >
+              <img
+                src="/img/portfolio/logo.png"
+                alt="Logo"
+                style={{ height: '120px', width: 'auto', paddingTop: '10px' }}
+                draggable="false"
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'transparent',
+                }}
+              ></div>
+            </div>
+
             Bhawan Care
           </Link>
         </div>

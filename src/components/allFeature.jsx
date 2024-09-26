@@ -5,9 +5,9 @@ import AnimatedComponent from "./animation";
 import { Contact } from "./contact";
 
 const AllFeature = ({ data, societyInfo }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null); // Track which card is hovered
-  const [showTextIndex1, setShowTextIndex1] = useState(null); // Track which card's text is visible in the first section
-  const [showTextIndex2, setShowTextIndex2] = useState(null); // Track which card's text is visible in the second section
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [showTextIndex1, setShowTextIndex1] = useState(null); 
+  const [showTextIndex2, setShowTextIndex2] = useState(null); 
 
   // Define an array of background colors for the cards
   const colors = [
