@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import AnimatedComponent from "./animation";
 
 export const Features = (props) => {
@@ -6,18 +7,21 @@ export const Features = (props) => {
     <div id="features" className="text-center">
       <div className="container">
         <div className="col-md-10 col-md-offset-1 section-title">
-        <AnimatedComponent animationType="scaleUp" >
-        <h2>Our Society Services</h2>
-        </AnimatedComponent>
+          <AnimatedComponent animationType="scaleUp">
+            <h2>Our App Interface</h2>
+          </AnimatedComponent>
         </div>
         <div className="row">
           {props.data
             ? props.data.map((d, i) => (
                 <div key={`${d.title}-${i}`} className="col-xs-6 col-md-3">
-                  {" "}
-                  <i className={d.icon}></i>
-                  <h3>{d.title}</h3>
-                  <p>{d.text}</p>
+                  {/* Wrap the card with a Link */}
+                  <Link to={`/common/${d.route}`}> {/* Slashes in route */}
+                    <i className={d.icon}></i>
+                  </Link>
+                    <h3>{d.title}</h3>
+                    <p>{d.text}</p>
+                
                 </div>
               ))
             : "Loading..."}

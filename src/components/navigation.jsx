@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 
-export const Navigation = (props) => {
+export const Navigation = ({ setActiveSection, features }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(null);
+
+  const handleDropdownEnter = () => {
+    setIsDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    setIsDropdownOpen(false);
+    setActiveFeature(null);
+  };
+
+  const toggleSubDropdown = (feature) => {
+    setActiveFeature(activeFeature === feature ? null : feature);
+  };
+
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -11,70 +29,94 @@ export const Navigation = (props) => {
             data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1"
           >
-            {" "}
-            <span className="sr-only">Toggle navigation</span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand page-scroll" href="#page-top">
-          <img
+          <Link className="navbar-brand page-scroll" to="/#page-top" onClick={() => setActiveSection('home')}>
+            <img
               src="/img/portfolio/logo.png"
               alt="Logo"
-              style={{ height: '70px',  }}
+              style={{ height: '70px' }}
             />
             Bhawan Care
-          </a>{" "}
+          </Link>
         </div>
 
-        <div
-          className="collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1"
-        >
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-right">
             <li>
+              <Link to="/#about" className="page-scroll" onClick={() => setActiveSection('about')}>
+                About Us
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/#services" className="page-scroll" onClick={() => setActiveSection('services')}>
+                Interface
+              </Link>
+            </li>
+            <li
+              className="dropdown-feature"
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+            >
               <a href="#features" className="page-scroll">
-              Services
+                <span style={{ display: 'flex', alignItems: 'center' }}>
+                  Features
+                  <FaAngleDown
+                    className="custom-arrow"
+                    style={{ cursor: 'pointer', fontSize: "20px", marginLeft: '5px', color: "#E8A905" }}
+                  />
+                </span>
               </a>
+              {isDropdownOpen && (
+                <ul className="dropdown-menu">
+                  {features.map((feature, index) => (
+                    <li
+                      key={index}
+                      onMouseEnter={() => toggleSubDropdown(feature.name)}
+                      onMouseLeave={() => toggleSubDropdown(null)} // Close sub-dropdown when leaving
+                    >
+                      <a href="#features" className="page-scroll">
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          {feature.name}
+                          <FaAngleRight
+                            className="custom-arrow"
+                            style={{ cursor: 'pointer', fontSize: "18px", marginLeft: '5px', color: "#E8A905" }}
+                          />
+                        </span>
+                      </a>
+                      {activeFeature === feature.name && (
+                        <ul className="sub-dropdown">
+                          {feature.subFeatures.map((subFeature, i) => (
+                            <li key={i}>
+                              <Link to={`/#${subFeature.replace(/\s+/g, '-').toLowerCase()}`} className="page-scroll" onClick={() => setActiveSection(subFeature)}>
+                                {subFeature}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
             <li>
-              <a href="#about" className="page-scroll">
-                About
-              </a>
+              <Link to="/#app" className="page-scroll" onClick={() => setActiveSection('app')}>
+                Download App
+              </Link>
             </li>
             <li>
-              <a href="#services" className="page-scroll">
-                Features
-              </a>
-            </li>
-            {/* <li>
-              <a href="#portfolio" className="page-scroll">
-                Gallery
-              </a>
-            </li> */}
-            {/* <li>
-              <a href="#testimonials" className="page-scroll">
-                Testimonials
-              </a>
-            </li> */}
-            <li>
-              <a href="#team" className="page-scroll">
-                Team
-              </a>
-            </li>
-            <li>
-              <a href="#app" className="page-scroll">
-              Download App
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="page-scroll">
-                Contact
-              </a>
+              <Link to="/#contact" className="page-scroll" onClick={() => setActiveSection('contact')}>
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   );
-};
+}

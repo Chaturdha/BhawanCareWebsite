@@ -1,34 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
 import AnimatedComponent from "./animation";
+import { useInView } from "react-intersection-observer";
+import ContactModal from "./contactModal";
 
 export const Header = (props) => {
+  const [smallImagesInView, setSmallImagesInView] = useState([false, false, false]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal open state
+
+  const { ref: firstImageRef, inView: firstImageInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+  const { ref: secondImageRef, inView: secondImageInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+  const { ref: thirdImageRef, inView: thirdImageInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+
+  React.useEffect(() => {
+    setSmallImagesInView([firstImageInView, secondImageInView, thirdImageInView]);
+  }, [firstImageInView, secondImageInView, thirdImageInView]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <header id="header">
       <div className="intro">
-        <div className="overlay">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 col-md-offset-2 intro-text">
-              <AnimatedComponent animationType="scaleUp" >
-                <h1>
-                  {props.data ? props.data.title : "Loading"}
-                  <span></span>
-                </h1>
-                </AnimatedComponent>
-                {/* <AnimatedComponent animationType="slideIn" direction="left"> */}
-                  <p>{props.data ? props.data.paragraph : "Loading"}</p>
-                {/* </AnimatedComponent> */}
-                <a
-                  href="#features"
-                  className="btn btn-custom btn-lg page-scroll"
-                >
-                  Get A Demo
-                </a>{" "}
+        <div className="intro-text">
+          <AnimatedComponent animationType="fadeInLeft">
+            <h1>{props.data ? "Bhawan Care" : "Loading"}</h1>
+          </AnimatedComponent>
+          <p>{props.data ? props.data.paragraph : "Loading"}</p>
+
+          <div className="button-container">
+            <button onClick={openModal} className="btn btn-custom btn-lg">
+              Get A Demo
+            </button>
+            <a href="#contact" className="btn btn-send btn-lg page-scroll">
+              Contact Us
+            </a>
+          </div>
+        </div>
+
+        {/* Right side: Image layout */}
+        <div className="intro-images">
+          <AnimatedComponent animationType="fadeInRight">
+            <div className="image-large-wrapper">
+              <div className="image-item large">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1672423154405-5fd922c11af2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YnVpbGRpbmd8ZW58MHx8MHx8fDA%3D"
+                  alt="Main Product"
+                  className="main-image"
+                />
               </div>
+            </div>
+          </AnimatedComponent>
+
+          <div className="small-images">
+            <div
+              className="image-item small"
+              ref={firstImageRef}
+              style={{
+                transform: firstImageInView
+                  ? "translate(0, 0)"
+                  : "translate(-50%, -50%) rotate(-20deg)",
+                transition: "transform 1s ease-in-out",
+              }}
+            >
+              <img
+                src="https://plus.unsplash.com/premium_photo-1661962911608-ea55ac7785da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8fDA%3D"
+                alt="Product 2"
+                className="small-image"
+              />
+            </div>
+            <div
+              className="image-item small"
+              ref={secondImageRef}
+              style={{
+                transform: secondImageInView
+                  ? "translate(0, 0)"
+                  : "translate(50%, -50%) rotate(15deg)",
+                transition: "transform 1s ease-in-out",
+              }}
+            >
+              <img
+                src="https://plus.unsplash.com/premium_photo-1661340695541-ee1ca7efedd0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJ1aWxkaW5nfGVufDB8fDB8fHww"
+                alt="Product 3"
+                className="small-image"
+              />
+            </div>
+            <div
+              className="image-item small"
+              ref={thirdImageRef}
+              style={{
+                transform: thirdImageInView
+                  ? "translate(0, 0)"
+                  : "translate(-40%, 40%) rotate(18deg)",
+                transition: "transform 1s ease-in-out",
+              }}
+            >
+              <img
+                src="https://plus.unsplash.com/premium_photo-1661340695541-ee1ca7efedd0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJ1aWxkaW5nfGVufDB8fDB8fHww"
+                alt="Product 4"
+                className="small-image"
+              />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={isModalOpen} onRequestClose={closeModal} />
     </header>
   );
 };

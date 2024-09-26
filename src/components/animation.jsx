@@ -3,7 +3,14 @@ import { useSpring, animated } from '@react-spring/web';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { useInView } from 'react-intersection-observer';
 
-const AnimatedComponent = ({ animationType, direction = 'left', children, text, ...props }) => {
+const AnimatedComponent = ({
+  animationType,
+  direction = 'left',
+  children,
+  text,
+  isSelected, // Pass in the selected state for expanding/collapsing answers
+  ...props
+}) => {
   const [inViewRef, inView] = useInView({
     threshold: 0.1, // Adjust threshold as needed
   });
@@ -26,6 +33,7 @@ const AnimatedComponent = ({ animationType, direction = 'left', children, text, 
 
   const slideInFrom = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
 
+  // Define all animations including the "Baseline"
   const animations = {
     fadeIn: useSpring({ opacity: inView ? 1 : 0, config: { duration: 1000 } }),
     slideIn: useSpring({ transform: inView ? 'translateX(0)' : slideInFrom, config: { duration: 1000 } }),
@@ -45,7 +53,38 @@ const AnimatedComponent = ({ animationType, direction = 'left', children, text, 
       opacity: inView ? 1 : 0,
       config: { duration: 500 },
     }),
+    fadeInLeft: useSpring({
+      opacity: inView ? 1 : 0,
+      transform: inView ? 'translateX(0)' : 'translateX(-100px)',
+      config: { duration: 1000 },
+    }),
+    fadeInRight: useSpring({
+      opacity: inView ? 1 : 0,
+      transform: inView ? 'translateX(0)' : 'translateX(100px)',
+      config: { duration: 1000 },
+    }),
     typewriter: { text: typewriterConfig[0], cursor: <Cursor /> },
+
+    // Animation for expandable/collapsible answers
+    expandCollapse: useSpring({
+      height: isSelected ? 'auto' : '0px',
+      opacity: isSelected ? 1 : 0,
+      overflow: 'hidden',
+      config: { duration: 300 },
+    }),
+
+     // Sliding animation for logos
+     slideLogos: useSpring({
+      from: { transform: 'translateX(100%)' },
+      to: { transform: 'translateX(-100%)' },
+      config: { duration: 5000, loop: true }, // Adjust the speed with the duration
+    }),
+
+    baseline: useSpring({
+      opacity: inView ? 1 : 0, // Fade in
+      transform: inView ? 'translateY(0) scale(1)' : 'translateY(100px) scale(0.9)', // Move up and scale to normal
+      config: { tension: 250, friction: 14, duration: 700 },
+    }),
   };
 
   const animationProps = animations[animationType] || {};

@@ -7,22 +7,25 @@ const initialState = {
   name: "",
   email: "",
   message: "",
+  contactNumber: "",
+  whatsappNumber: "",
+  city: "",
+  societyName: "",
 };
+
 export const Contact = (props) => {
-  const [{ name, email, message }, setState] = useState(initialState);
+  const [{ name, email, message, contactNumber, whatsappNumber, city, societyName }, setState] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
-  const clearState = () => setState({ ...initialState });
 
+  const clearState = () => setState({ ...initialState });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, message);
-
-    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
+    console.log(name, email, message, contactNumber, whatsappNumber, city, societyName);
 
     emailjs
       .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
@@ -36,6 +39,7 @@ export const Contact = (props) => {
         }
       );
   };
+
   return (
     <div>
       <div id="contact">
@@ -43,7 +47,7 @@ export const Contact = (props) => {
           <div className="col-md-8">
             <div className="row">
               <div className="section-title">
-                  <h2>Get In Touch</h2>
+                <h2>Get In Touch</h2>
                 <p>
                   Please fill out the form below to send us an email and we will
                   get back to you as soon as possible.
@@ -58,7 +62,7 @@ export const Contact = (props) => {
                         id="name"
                         name="name"
                         className="form-control"
-                        placeholder="Name"
+                        placeholder="Name *"
                         required
                         onChange={handleChange}
                       />
@@ -72,7 +76,66 @@ export const Contact = (props) => {
                         id="email"
                         name="email"
                         className="form-control"
-                        placeholder="Email"
+                        placeholder="Email *"
+                        required
+                        onChange={handleChange}
+                      />
+                      <p className="help-block text-danger"></p>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="contactNumber"
+                        name="contactNumber"
+                        className="form-control"
+                        placeholder="Contact Number *"
+                        required
+                        onChange={handleChange}
+                      />
+                      <p className="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="whatsappNumber"
+                        name="whatsappNumber"
+                        className="form-control"
+                        placeholder="WhatsApp Number (Optional)" // Updated placeholder
+                        onChange={handleChange} // Removed required
+                      />
+                      <p className="help-block text-danger"></p>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        className="form-control"
+                        placeholder="City *"
+                        required
+                        onChange={handleChange}
+                      />
+                      <p className="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="societyName"
+                        name="societyName"
+                        className="form-control"
+                        placeholder="Society Name *"
                         required
                         onChange={handleChange}
                       />
@@ -87,7 +150,6 @@ export const Contact = (props) => {
                     className="form-control"
                     rows="4"
                     placeholder="Message"
-                    required
                     onChange={handleChange}
                   ></textarea>
                   <p className="help-block text-danger"></p>
@@ -104,7 +166,7 @@ export const Contact = (props) => {
               <h3>Contact Info</h3>
               <p>
                 <span>
-                  <i className="fa fa-map-marker"></i> Address
+                  <i className="fa fa-map-marker"></i> Head Office
                 </span>
                 {props.data ? props.data.address : "loading"}
               </p>
@@ -112,7 +174,7 @@ export const Contact = (props) => {
             <div className="contact-item">
               <p>
                 <span>
-                  <i className="fa fa-phone"></i> Phone
+                  <i className="fa fa-phone"></i> Tollfree No.
                 </span>{" "}
                 {props.data ? props.data.phone : "loading"}
               </p>
@@ -125,48 +187,67 @@ export const Contact = (props) => {
                 {props.data ? props.data.email : "loading"}
               </p>
             </div>
-          </div>
-          <div className="col-md-12">
-            <div className="row">
-              <div className="social">
-                <ul>
-                  <li>
-                    <AnimatedComponent animationType="bounce" >
-                      <a>
-                        <i className="fa fa-facebook"></i>
-                      </a>
-                    </AnimatedComponent>
-                  </li>
-                  <li>
-                    <AnimatedComponent animationType="bounce" >
-                      <a>
-                        <i className="fa fa-twitter"></i>
-                      </a>
-                    </AnimatedComponent>
-                  </li>
-                  <li>
-                    <AnimatedComponent animationType="bounce" >
-                      <a>
-                        <i className="fa fa-youtube"></i>
-                      </a>
-                    </AnimatedComponent>
-                  </li>
-                </ul>
-              </div>
+
+            {/* App Store and Play Store icons */}
+            <div className="button-row">
+              <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer">
+                <img
+                  src="../img/apple-logo.png" // Replace with a local asset if needed
+                  alt="App Store"
+                  className="store-icon-img"
+                />
+              </a>
+              <a href="https://play.google.com/store" target="_blank" rel="noreferrer">
+                <img
+                  src="../img/playstore.png" // Replace with a local asset if needed
+                  alt="Play Store"
+                  className="store-icon-img"
+                />
+              </a>
             </div>
           </div>
         </div>
       </div>
-      {/* <div id="footer">
+
+      {/* Footer */}
+      <div id="footer">
         <div className="container text-center">
-          <p>
-            &copy; 2023 Issaaf Kattan React Land Page Template. Design by{" "}
-            <a href="http://www.templatewire.com" rel="nofollow">
-              TemplateWire
-            </a>
-          </p>
+          <div className="footer-content">
+            <span className="footer-text">
+              Bhawan Care by Chaturdha Projects & Services Pvt Ltd
+            </span>
+            <span className="vertical-line"></span>
+            <div className="footer-social">
+              <ul>
+                <li>
+                  <AnimatedComponent animationType="bounce">
+                    <a>
+                      <i className="fa fa-facebook"></i>
+                    </a>
+                  </AnimatedComponent>
+                </li>
+                <li>
+                  <AnimatedComponent animationType="bounce">
+                    <a>
+                      <i className="fa fa-twitter"></i>
+                    </a>
+                  </AnimatedComponent>
+                </li>
+                <li>
+                  <AnimatedComponent animationType="bounce">
+                    <a>
+                      <i className="fa fa-youtube"></i>
+                    </a>
+                  </AnimatedComponent>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-links">
+            <a href="#">Privacy Policy</a> | <a href="#">T & C</a>
+          </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

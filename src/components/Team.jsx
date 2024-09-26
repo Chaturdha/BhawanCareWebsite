@@ -7,7 +7,7 @@ export const Team = (props) => {
       <div className="container">
         <div className="col-md-8 col-md-offset-2 section-title">
         <AnimatedComponent animationType="scaleUp" >
-          <h2>Meet the Team</h2>
+          <h2>Meet Our Team</h2>
           </AnimatedComponent>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed
