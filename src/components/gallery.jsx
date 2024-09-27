@@ -54,7 +54,7 @@ export const Gallery = () => {
   ];
 
   return (
-    <div className="gallery-section">
+    <div id='gallery' className="gallery-section">
       <AnimatedComponent animationType="scaleUp" >
         <h2>Recognized Achievements</h2>
       </AnimatedComponent>

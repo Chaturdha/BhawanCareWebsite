@@ -1,12 +1,16 @@
 @media screen and (max-width: 400px) {
+  #app,
+  #industry,
   #features {
     padding: 20px;
     width: 111%;
   }
   #about,
   #services,
-  #testimonials,
   #team,
+  #testimonials,
+  #city,
+  #FAQ,
   #contact,
   #footer {
     width: 111%;
@@ -15,4 +19,5 @@
   #portfolio {
     width: 110%;
   }
+
 }

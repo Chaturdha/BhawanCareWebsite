@@ -115,6 +115,7 @@
     }
     
   ],
+
   "Testimonials": [
     {
       "img": "img/testimonials/01.png",
@@ -138,12 +139,12 @@
     },
     {
       "img": "img/testimonials/05.png",
-      "text": "\"As a resident, I appreciate how Bhawan Care keeps us connected. The features for booking amenities and reporting issues are fantastic! It’s great to see such modern solutions for traditional challenges.\"",
+      "text": "\"As a resident, I love how Bhawan Care keeps us connected. The features for booking amenities and reporting issues are fantastic! It's great to see modern solutions for traditional challenges.\"",
       "name": " Anil Verma"
     },
     {
       "img": "img/testimonials/06.png",
-      "text": "\"Bhawan Care has streamlined our society's operations significantly. The maintenance charge automation is efficient, and the app's overall design is intuitive. I can’t imagine going back to the old way of managing things!\"",
+      "text": "\"Bhawan Care has streamlined our society's operations. The maintenance charge automation is efficient and intuitive. I can’t imagine going back to the old way of managing things!\"",
       "name": "Kavya Nair"
     }
   ],

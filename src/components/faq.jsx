@@ -26,7 +26,7 @@ const FAQPage = () => {
     };
 
     return (
-        <div className="faq-page">
+        <div id='FAQ' className="faq-page">
             {/* Animate the FAQ title and intro */}
             <div className="faq-content" >
                 <AnimatedComponent animationType="scaleUp">

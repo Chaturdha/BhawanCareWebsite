@@ -39,7 +39,7 @@ export const Industries = () => {
   };
 
   return (
-    <div className="sliding-section">
+    <div id='industry' className="sliding-section">
       <AnimatedComponent animationType="scaleUp">
         <h2>Our Industry Affiliations</h2>
       </AnimatedComponent>

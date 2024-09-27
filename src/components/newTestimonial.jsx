@@ -3,28 +3,33 @@ import AnimatedComponent from './animation';
 
 export const NewTestimonial = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [visibleSlides, setVisibleSlides] = useState(3); // Default: 3 slides visible
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 576) {
+        setVisibleSlides(1); // 1 column for small devices
+      } else if (window.innerWidth <= 768) {
+        setVisibleSlides(2); // 2 columns for tablets
+      } else {
+        setVisibleSlides(3); // 3 columns for larger screens
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) =>
-        prevSlide === data.length - 3 ? 0 : prevSlide + 1
-      ); // Slide back to start after the last visible card
-    }, 3000); // Change slide every 5 seconds
+        prevSlide === data.length - visibleSlides ? 0 : prevSlide + 1
+      );
+    }, 3000);
 
-    return () => clearInterval(interval);
-  }, [data]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === data.length - 3 ? 0 : prevSlide + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? data.length - 3 : prevSlide - 1
-    );
-  };
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearInterval(interval);
+    };
+  }, [data, visibleSlides]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -38,41 +43,41 @@ export const NewTestimonial = ({ data }) => {
         </AnimatedComponent>
       </div>
 
-      {/* Testimonial Row */}
       <div
         className="testimonial-row"
         style={{
-          transform: `translateX(-${currentSlide * 33.33}%)` // Slide one card at a time
+          transform: `translateX(-${currentSlide * (100 / visibleSlides)}%)`,
         }}
       >
-        {data ? (
-          data.map((d, i) => (
-            <div
-              key={`${d.name}-${i}`}
-              className={`testimonial-column ${i >= currentSlide && i < currentSlide + 3 ? 'active' : ''}`}
-            >
-              <div className="testimonial-box">
-                <div className="testimonial-image-wrapper">
-                  <img className="testimonial-img" src={d.img} alt={d.name} />
-                </div>
-                <div className="testimonial-content-wrapper">
-                  <p className="testimonial-text">"{d.text}"</p>
-                  <div className="testimonial-author">- {d.name}</div>
-                </div>
+        {data.map((d, i) => (
+          <div
+            key={`${d.name}-${i}`}
+            className={`testimonial-column ${
+              i >= currentSlide && i < currentSlide + visibleSlides
+                ? 'active'
+                : ''
+            }`}
+          >
+            <div className="testimonial-box">
+              <div className="testimonial-image-wrapper">
+                <img className="testimonial-img" src={d.img} alt={d.name} />
+              </div>
+              <div className="testimonial-content-wrapper">
+                <p className="testimonial-text">"{d.text}"</p>
+                <div className="testimonial-author">- {d.name}</div>
               </div>
             </div>
-          ))
-        ) : (
-          'loading'
-        )}
+          </div>
+        ))}
       </div>
 
-      {/* Dots Navigation */}
       <div className="testimonial-dots">
-        {Array.from({ length: data.length - 2 }, (_, i) => (
+        {Array.from({ length: data.length - (visibleSlides - 1) }, (_, i) => (
           <div
             key={i}
-            className={`testimonial-dot ${i === currentSlide ? 'active' : ''}`}
+            className={`testimonial-dot ${
+              i === currentSlide ? 'active' : ''
+            }`}
             onClick={() => goToSlide(i)}
           ></div>
         ))}
