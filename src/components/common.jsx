@@ -5,12 +5,43 @@ import AnimatedComponent from "./animation"; // Animation component
 import { Navigation } from "./navigation"; // Navigation component
 import { Contact } from "./contact"; // Contact component
 import { Player } from '@lottiefiles/react-lottie-player';
+import JsonData from "../data/data.json"; // Ensure this path is correct
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Error caught in Error Boundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>Something went wrong. Please try again later.</div>;
+    }
+    return this.props.children;
+  }
+}
 
 const Common = () => {
   const { section } = useParams(); // Extract section from URL
   const [cardData, setCardData] = useState([]);
+  const [landingPageData, setLandingPageData] = useState(JsonData);
+
+  useEffect(() => {
+    setLandingPageData(JsonData);
+  }, []);
+
+  // If landingPageData is not loaded, show loading state
+  if (!landingPageData) {
+    return <div>Loading...</div>;
+  } 
 
   useEffect(() => {
     // Scroll to the top when the component mounts
@@ -30,6 +61,7 @@ const Common = () => {
   const sectionTitle = section.charAt(0).toUpperCase() + section.slice(1);
 
   return (
+    <ErrorBoundary>
     <div className="container1">
       <Navigation />
       <div className="section-title text-center section-title-top">
@@ -41,7 +73,7 @@ const Common = () => {
 
       <div>
         <img
-          src="../img/adminImage.svg"
+          src="../img/imageAdmin.jpg"
           alt={`${section} section image`}
           className="responsive-svg"
         />
@@ -76,8 +108,9 @@ const Common = () => {
         </div>
       </div>
 
-      <Contact />
+      <Contact data={landingPageData.Contact}/>
     </div>
+    </ErrorBoundary>
   );
 };
 

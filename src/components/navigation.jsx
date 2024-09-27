@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 
 export const Navigation = ({ setActiveSection, features }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(null);
+  const dropdownRef = useRef(null);
 
-  const handleDropdownEnter = () => {
-    setIsDropdownOpen(true);
-  };
-
-  const handleDropdownLeave = () => {
-    setIsDropdownOpen(false);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
     setActiveFeature(null);
   };
 
   const toggleSubDropdown = (feature) => {
     setActiveFeature(activeFeature === feature ? null : feature);
   };
+
+  // Handle click outside the dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+        setActiveFeature(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
@@ -77,13 +89,9 @@ export const Navigation = ({ setActiveSection, features }) => {
                 Interface
               </Link>
             </li>
-            <li
-              className="dropdown-feature"
-              onMouseEnter={handleDropdownEnter}
-              onMouseLeave={handleDropdownLeave}
-            >
-              <a href="#features" className="page-scroll">
-                <span style={{ display: 'flex', alignItems: 'center' }}>
+            <li className="dropdown-feature" ref={dropdownRef}>
+              <a className="page-scroll" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
+                <span href="#" style={{ display: 'flex', alignItems: 'center' }}>
                   Features
                   <FaAngleDown
                     className="custom-arrow"
@@ -94,27 +102,26 @@ export const Navigation = ({ setActiveSection, features }) => {
               {isDropdownOpen && (
                 <ul className="dropdown-menu">
                   {features.map((feature, index) => (
-                    <li
-                      key={index}
-                      onMouseEnter={() => toggleSubDropdown(feature.name)}
-                      onMouseLeave={() => toggleSubDropdown(null)} // Close sub-dropdown when leaving
-                    >
-                      <a href="#features" className="page-scroll">
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <li key={index}>
+                      <span style={{ display: 'flex', alignItems: 'center' }}>
+                        <a href="#" className="page-scroll dropdown-item" onClick={() => toggleSubDropdown(feature.name)} >
                           {feature.name}
-                          <FaAngleRight
-                            className="custom-arrow"
-                            style={{ cursor: 'pointer', fontSize: "18px", marginLeft: '5px', color: "#E8A905" }}
-                          />
-                        </span>
-                      </a>
+                        </a>
+                        <FaAngleRight
+                          className="custom-arrow"
+                          style={{ cursor: 'pointer', fontSize: "18px", marginLeft: '5px', color: "#E8A905" }}
+                        />
+                      </span>
                       {activeFeature === feature.name && (
                         <ul className="sub-dropdown">
                           {feature.subFeatures.map((subFeature, i) => (
                             <li key={i}>
-                              <Link to={`/#${subFeature.replace(/\s+/g, '-').toLowerCase()}`} className="page-scroll" onClick={() => setActiveSection(subFeature)}>
+                              {/* <Link to={`/#${subFeature.replace(/\s+/g, '-').toLowerCase()}`} className="page-scroll dropdown-item" onClick={() => setActiveSection(subFeature)}>
                                 {subFeature}
-                              </Link>
+                              </Link> */}
+                              <a href="#features" className="page-scroll dropdown-item">
+                                {subFeature}
+                              </a>
                             </li>
                           ))}
                         </ul>
@@ -139,4 +146,4 @@ export const Navigation = ({ setActiveSection, features }) => {
       </div>
     </nav>
   );
-}
+};
