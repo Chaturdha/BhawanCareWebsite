@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
+import {
+  FaAngleDown,
+} from 'react-icons/fa'; // Importing the needed icons
 
-export const Navigation = ({ setActiveSection, features }) => {
+export const Navigation = ({ features,menuData }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeFeature, setActiveFeature] = useState(null);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-    setActiveFeature(null);
   };
 
-  const toggleSubDropdown = (feature) => {
-    setActiveFeature(activeFeature === feature ? null : feature);
+  const handleCall = () => {
+    window.open('tel:+1800 2575 2244'); // Your phone number
   };
 
   // Handle click outside the dropdown to close it
@@ -21,7 +21,6 @@ export const Navigation = ({ setActiveSection, features }) => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
-        setActiveFeature(null);
       }
     };
 
@@ -60,7 +59,7 @@ export const Navigation = ({ setActiveSection, features }) => {
                 style={{ height: '120px', width: 'auto', paddingTop: '10px' }}
                 draggable="false"
               />
-              <div
+              <div className="logo"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -79,19 +78,13 @@ export const Navigation = ({ setActiveSection, features }) => {
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <Link to="/#about" className="page-scroll" onClick={() => setActiveSection('about')}>
+              <Link to="/#about" className="page-scroll">
                 About Us
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/#services" className="page-scroll" onClick={() => setActiveSection('services')}>
-                Interface
               </Link>
             </li>
             <li className="dropdown-feature" ref={dropdownRef}>
               <a className="page-scroll" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
-                <span href="#" style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                   Features
                   <FaAngleDown
                     className="custom-arrow"
@@ -100,46 +93,144 @@ export const Navigation = ({ setActiveSection, features }) => {
                 </span>
               </a>
               {isDropdownOpen && (
-                <ul className="dropdown-menu">
-                  {features.map((feature, index) => (
-                    <li key={index}>
-                      <span style={{ display: 'flex', alignItems: 'center' }}>
-                        <a href="#" className="page-scroll dropdown-item" onClick={() => toggleSubDropdown(feature.name)} >
-                          {feature.name}
-                        </a>
-                        <FaAngleRight
-                          className="custom-arrow"
-                          style={{ cursor: 'pointer', fontSize: "18px", marginLeft: '5px', color: "#E8A905" }}
-                        />
-                      </span>
-                      {activeFeature === feature.name && (
-                        <ul className="sub-dropdown">
-                          {feature.subFeatures.map((subFeature, i) => (
-                            <li key={i}>
-                              {/* <Link to={`/#${subFeature.replace(/\s+/g, '-').toLowerCase()}`} className="page-scroll dropdown-item" onClick={() => setActiveSection(subFeature)}>
-                                {subFeature}
-                              </Link> */}
-                              <a href="#features" className="page-scroll dropdown-item">
-                                {subFeature}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <div className="dropdown-container">
+                  <div className="dropdown-content">
+                    <div className="dropdown-column">
+                      <div style={{ padding: 15,  borderRadius: 15, height: 200 }}>
+                        <img src="../img/header/small4.png" alt="description of image" style={{ width: 2000, height: 120, objectFit: "cover", padding: 10 }} />
+                        <h4>Management & Services</h4>
+                      </div>
+                      <div>
+                          <div className="featureIcon">
+                            <img  src="../img/header/image1.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                            <a href="#allFeature">Maintenance Charge</a>
+                          </div>
+                       
+                        <div className="featureIcon">
+                        <img  src="../img/header/image2.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                        <a href="#allFeature">Election</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image3.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Service Request</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image4.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Garage Rent</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image5.png" alt="description of image" style={{width: 25, height: 25,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Festival</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image6.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Meeting Arrangement</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image7.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Collection & Expenses</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image8.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Ladies Club</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image9.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Security Gate</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image10.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Fun2shh Chat</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image11.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Sell/Rent</a>
+                        </div>
+                      </div>
+                     
+
+                    </div>
+                    <div className="dropdown-column with-line">
+                      <div style={{ padding: 15,  borderRadius: 15, height: 200 }}>
+                        <img src="../img/header/small5.png" alt="description of image" style={{ width: 2000, height: 120, objectFit: "cover",  padding: 10 }} />
+                        <h4>Society Information</h4>
+                      </div>
+
+                      <div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image12.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Notice Board</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image13.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Emergency Contacts</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image14.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">External workers</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image15.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Laundry</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image16.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Corpus Fund</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image17.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Local Programs</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image18.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Society Information</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image19.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Society Rule</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image20.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Internal Worker</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image21.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Intercom Details</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image22.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Holidays</a>
+                        </div>
+                        <div className="featureIcon">
+                        <img  src="../img/header/image23.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Society Members History</a>
+                        </div>
+                        <div className="featureIcon" style={{ paddingBottom: 10 }}>
+                        <img  src="../img/header/image24.png" alt="description of image" style={{width: 20, height: 20,  objectFit: "cover" ,  marginRight: 10}} />
+                          <a href="#allFeature">Society Bank Details</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
               )}
             </li>
             <li>
-              <Link to="/#app" className="page-scroll" onClick={() => setActiveSection('app')}>
+              <Link to="/#app" className="page-scroll">
                 Download App
               </Link>
             </li>
             <li>
-              <Link to="/#contact" className="page-scroll" onClick={() => setActiveSection('contact')}>
+              <Link to="/#contact" className="page-scroll">
                 Contact Us
               </Link>
+            </li>
+            <li>
+              <Link to="/#" className="page-scroll" onClick={handleCall}>
+              +1800 2575 2244
+              </Link>
+
             </li>
           </ul>
         </div>

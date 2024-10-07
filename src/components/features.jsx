@@ -19,7 +19,7 @@ export const Features = (props) => {
                   <Link to={`/common/${d.route}`}> {/* Slashes in route */}
                     <i className={d.icon}></i>
                   </Link>
-                    <h3>{d.title}</h3>
+                  <h3 style={{ color: "#E8A905" }}>{d.title}</h3>
                     <p>{d.text}</p>
                 
                 </div>

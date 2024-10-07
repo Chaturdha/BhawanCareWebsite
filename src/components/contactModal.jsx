@@ -61,7 +61,7 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
       </button>
 
       <h2 style={{ textAlign: 'center', color: '#E8A905' }}>
-        Request a Demo
+        Book a Demo
       </h2>
       <p style={{ textAlign: 'center', color: '#94664b', marginBottom: '20px' }}>
         Please fill in your details to request a demo.

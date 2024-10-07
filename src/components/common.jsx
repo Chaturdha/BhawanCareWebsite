@@ -41,7 +41,7 @@ const Common = () => {
   // If landingPageData is not loaded, show loading state
   if (!landingPageData) {
     return <div>Loading...</div>;
-  } 
+  }
 
   useEffect(() => {
     // Scroll to the top when the component mounts
@@ -62,54 +62,49 @@ const Common = () => {
 
   return (
     <ErrorBoundary>
-    <div className="container1">
-      <Navigation />
-      <div className="section-title text-center section-title-top">
-        <AnimatedComponent animationType="scaleUp">
-          <h2>Exclusive Features for {sectionTitle}</h2>
-        </AnimatedComponent>
-        <p>Enhancing Community Experience and Engagement</p>
-      </div>
+      <div className="container1">
+        <Navigation />
+        <div className="section-title text-center section-title-top">
+          <AnimatedComponent animationType="scaleUp">
+            <h2>Exclusive Features for {sectionTitle}</h2>
+          </AnimatedComponent>
+          <p>Enhancing Community Experience and Engagement</p>
+        </div>
 
-      <div>
-        <img
-          src="../img/imageAdmin.jpg"
-          alt={`${section} section image`}
-          className="responsive-svg"
-        />
-        <div className="animatedcard">
-          {cardData.length > 0 ? (
-            cardData.map((d, i) => (
-              <div key={`${d.title}-${i}`} className="card">
-                <div className="card-content">
-                  <div className="card-text">
-                    <h3>{d.title}</h3>
-                    <p>{d.paragraph}</p>
-                  </div>
-                  <div className="card-image">
-                    {/* <img
-                      src={d.largeImage}
-                      alt={`Card visual for ${d.title}`}
-                      className="right-image"
-                    /> */}
-                    <Player
-                      autoplay
-                      loop
-                      src={d.largeImage}
-                      style={{ height: '150px', width: '150px' }}
-                    />
+        <div>
+          <img
+            src="../img/imageAdmin.png"
+            alt={`${section} section image`}
+            className="responsive-svg"
+          />
+          <div className="animatedcard">
+            {cardData.length > 0 ? (
+              cardData.map((d, i) => (
+                <div key={`${d.title}-${i}`} className="card">
+                  <div className="card-content">
+                    <div className="card-text">
+                      <h3>{d.title}</h3>
+                      <p>{d.paragraph}</p>
+                    </div>
+                    <div className="card-image">
+                      <Player
+                        autoplay
+                        loop
+                        src={d.largeImage}
+                        style={{ height: '150px', width: '150px' }}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <p>Loading...</p>
-          )}
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
         </div>
-      </div>
 
-      <Contact data={landingPageData.Contact}/>
-    </div>
+        <Contact data={landingPageData.Contact} />
+      </div>
     </ErrorBoundary>
   );
 };

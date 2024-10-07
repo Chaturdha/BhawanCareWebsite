@@ -20,4 +20,69 @@
     width: 110%;
   }
 
+  #choose {
+    padding-left: 10px;
+    width: 100%;
+  }
+
+}
+
+
+@media screen and (max-width: 480px) {
+  #app,
+  #industry,
+  #features {
+    padding: 20px;
+    width: 111%;
+  }
+  #about,
+  #services,
+  #team,
+  #testimonials,
+  #city,
+  #FAQ,
+  #contact,
+  #footer {
+    width: 111%;
+  }
+
+  #portfolio {
+    width: 110%;
+  }
+
+  #choose {
+    padding-left: 15px;
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  #app,
+  #industry,
+  #features {
+    padding: 20px;
+    width: 111%;
+  }
+  #about,
+  #services,
+  #team,
+  #testimonials,
+  #city,
+  #FAQ,
+  #contact,
+  #footer {
+    width: 111%;
+  }
+
+  #portfolio {
+    width: 111%;
+    padding-left: 4%;
+  }
+
+  #choose {
+    padding-left: 15px;
+    width: 100%;
+  }
+
 }

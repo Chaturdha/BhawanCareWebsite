@@ -41,7 +41,7 @@ const Widget = () => {
             <FaWhatsapp size={26} /> {/* Adjust the size as needed */}
           </button>
           <button onClick={handleGetDemo} className="widget-button">
-            Get Demo
+            Book Demo
           </button>
         </div>
       )}

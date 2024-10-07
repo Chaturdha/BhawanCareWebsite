@@ -4,10 +4,10 @@ import AnimatedComponent from './animation';
 export const Cities = () => {
 
     const cities = [
-        'NEW DELHI', 'NOIDA', 'GURGAON', 'CHANDIGARH', 'LUCKNOW',
-        'AMRITSAR', 'BANGALORE', 'HYDERABAD', 'CHENNAI', 'VISAKHAPATNAM',
-        'BHUBANESWAR', 'KOLKOTTA', 'MUMBAI', 'PUNE', 'AHMEDABAD',
-        'SURAT', 'JAIPUR', 'NAGPUR', 'INDORE', 'RAIPUR'
+        'NEW DELHI', 'UTTAR PRADESH', 'HARYANA', 
+        'PUNJAB', 'KARNATAKA', 'TELANGANA', 'TAMIL NADU', 'ANDHRA PRADESH',
+        'ODISHA', 'WEST BENGAL', 'MAHARASHTRA', 'GUJRAT', 'RAJASTHAN', 'MADHYA PRADESH', 'CHHATTISGARH',
+        'ARUNACHAL PRADESH', 'MEGHALAYA', 'BIHAR', 'MANIPUR', 'KERALA', 'JHARKHAND', 'TRIPURA', 'UTTRAKHAND', 
     ];
 
     return (

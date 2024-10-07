@@ -3,11 +3,11 @@ import AnimatedComponent from './animation';
 
 export const Industries = () => {
   const images = [
-    { id: 1, url: '/img/01.jpg', caption: 'Up For a Challenge?' },
-    { id: 2, url: '/img/02.jpg', caption: 'Unlock Personalized Learning' },
-    { id: 3, url: '/img/03.jpg', caption: 'Experience Hassle-Free Rides' }, // Example caption for the third image
-    { id: 4, url: '/img/04.jpg', caption: 'Looking for Dedicated Staff?' },
-    { id: 5, url: '/img/05.jpg', caption: 'Explore Tours & Packages.' },
+    { id: 1, url: '/img/industry/01.jpg', caption: 'Up For a Challenge?' },
+    { id: 2, url: '/img/industry/02.jpg', caption: 'Unlock Personalized Learning' },
+    { id: 3, url: '/img/industry/03.jpg', caption: 'Experience Hassle-Free Rides' }, // Example caption for the third image
+    { id: 4, url: '/img/industry/04.jpg', caption: 'Looking for Dedicated Staff?' },
+    { id: 5, url: '/img/industry/05.jpg', caption: 'Explore Tours & Packages.' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

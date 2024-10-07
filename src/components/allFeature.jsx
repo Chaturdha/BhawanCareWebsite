@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Player } from '@lottiefiles/react-lottie-player';
 import { FaAngleDown } from 'react-icons/fa';
 import AnimatedComponent from "./animation";
@@ -34,16 +34,35 @@ const AllFeature = ({ data, societyInfo }) => {
   const [showTextIndex2, setShowTextIndex2] = useState(null);
   const [landingPageData, setLandingPageData] = useState(JsonData);
 
+  const featureCardRefs = useRef([]);
+  const societyInfoRefs = useRef([]);
+
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
+
+  // Close card if clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showTextIndex1 !== null && featureCardRefs.current[showTextIndex1] && !featureCardRefs.current[showTextIndex1].contains(event.target)) {
+        setShowTextIndex1(null);
+      }
+      if (showTextIndex2 !== null && societyInfoRefs.current[showTextIndex2] && !societyInfoRefs.current[showTextIndex2].contains(event.target)) {
+        setShowTextIndex2(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showTextIndex1, showTextIndex2]);
 
   // If landingPageData is not loaded, show loading state
   if (!landingPageData) {
     return <div>Loading...</div>;
   }
 
-  // Array of background colors for the cards
   const colors = [
     "#cce6ff", "#f2d9d9", "#ccccff", "#ffccff",
     "#ccffcc", "#ffffcc", "#ffebcc", "#d6f5d6", "#ffd9cc"
@@ -73,6 +92,7 @@ const AllFeature = ({ data, societyInfo }) => {
             {data.slice(0, 5).map((feature, index) => (
               <div
                 key={index}
+                ref={(el) => featureCardRefs.current[index] = el} // Attach ref to each card
                 className="featureCard"
                 style={{
                   backgroundColor: hoveredIndex === index ? colors[index % colors.length] : "#f5f5f5",
@@ -103,6 +123,7 @@ const AllFeature = ({ data, societyInfo }) => {
             {data.slice(5, 9).map((feature, index) => (
               <div
                 key={index + 5}
+                ref={(el) => featureCardRefs.current[index + 5] = el} // Attach ref to each card
                 className="featureCard"
                 style={{
                   backgroundColor: hoveredIndex === index + 5 ? colors[(index + 5) % colors.length] : "#f5f5f5",
@@ -161,6 +182,7 @@ const AllFeature = ({ data, societyInfo }) => {
             {societyInfo.slice(0, 5).map((info, index) => (
               <div
                 key={index}
+                ref={(el) => societyInfoRefs.current[index] = el} // Attach ref to each society info card
                 className="featureCard"
                 style={{
                   backgroundColor: hoveredIndex === index ? colors[index % colors.length] : "#f5f5f5",
@@ -191,6 +213,7 @@ const AllFeature = ({ data, societyInfo }) => {
             {societyInfo.slice(5, 11).map((info, index) => (
               <div
                 key={index + 5}
+                ref={(el) => societyInfoRefs.current[index + 5] = el} // Attach ref to each society info card
                 className="featureCard"
                 style={{
                   backgroundColor: hoveredIndex === index + 5 ? colors[(index + 5) % colors.length] : "#f5f5f5",

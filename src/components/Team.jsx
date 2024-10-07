@@ -10,8 +10,8 @@ export const Team = (props) => {
           <h2>Meet Our Team</h2>
           </AnimatedComponent>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed
-            dapibus leonec.
+          Get to know the passionate individuals behind our success, working together 
+          to achieve excellence.
           </p>
         </div>
         <div id="row">
