@@ -17,7 +17,7 @@ export const About = (props) => {
               <AnimatedComponent animationType="scaleUp">
                 <h2>About Us</h2>
               </AnimatedComponent>
-              <p>{props.data ? props.data.para5 : "loading..."}</p>
+              <p>{props.data ? props.data.para7 : "loading..."}</p>
 
               <h2>Our Core Values</h2>
               <div className="list-style">

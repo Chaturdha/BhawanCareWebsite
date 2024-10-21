@@ -22,7 +22,11 @@ export const AboutPage = ({ data }) => {
               <AnimatedComponent animationType="scaleUp">
                 <h2>About Us</h2>
               </AnimatedComponent>
-              <p>{data ? data.paragraph : "loading..."}</p>
+              <p>{data ? data.para7 : "loading..."}</p>
+              <p>{data ? data.para8 : "loading..."}</p>
+              <p>{data ? data.para9 : "loading..."}</p>
+              <p>{data ? data.para10 : "loading..."}</p>
+              <p>{data ? data.para11 : "loading..."}</p>
 
               <h2>What We Do</h2>
               <p>{data ? data.para3 : "loading..."}</p>
@@ -68,12 +72,12 @@ export const AboutPage = ({ data }) => {
               <h2>Join Us</h2>
               <p>{data ? data.para6 : "loading..."}</p>
 
-              <h2>Company Overview</h2>
+              {/* <h2>Company Overview</h2>
               <p>{data ? data.para7 : "loading..."}</p>
               <p>{data ? data.para8 : "loading..."}</p>
               <p>{data ? data.para9 : "loading..."}</p>
               <p>{data ? data.para10 : "loading..."}</p>
-              <p>{data ? data.para11 : "loading..."}</p>
+              <p>{data ? data.para11 : "loading..."}</p> */}
             </div>
           </div>
         </div>
