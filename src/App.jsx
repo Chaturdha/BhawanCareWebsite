@@ -55,7 +55,6 @@ const App = () => {
       <ScrollToSection /> {/* Scroll component to handle hash change */}
       <div>
         <Navigation features={landingPageData.Navigation} />
-
         <Routes>
           <Route
             path="/"
