@@ -15,7 +15,7 @@ export const Cities = () => {
         <div id='city'>
         <section className="cities-section">
             <AnimatedComponent animationType="scaleUp" >
-                <h2 className="section-heading">We’re Here For You</h2>
+                <h2 className="section-heading">We’re Here For You </h2>
             </AnimatedComponent>
             <ul className="cities-list">
                 {cities.map((city, index) => (
