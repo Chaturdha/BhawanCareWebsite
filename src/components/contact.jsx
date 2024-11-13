@@ -1,5 +1,5 @@
 import { useState } from "react";
-import emailjs from "emailjs-com";
+import emailjs from '@emailjs/browser';
 import React from "react";
 import AnimatedComponent from "./animation";
 
@@ -28,14 +28,21 @@ export const Contact = (props) => {
     console.log(name, email, message, contactNumber, whatsappNumber, city, societyName);
 
     emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
+      .sendForm(
+        "service_4211m8l", // replace with your EmailJS service ID
+        "template_5agje9l", // replace with your EmailJS template ID
+        e.target, // form element
+        "7JbFWgAbd51t2TcEH" // replace with your EmailJS public key
+      )
       .then(
         (result) => {
           console.log(result.text);
-          clearState();
+          // clearState(); 
+          alert("Submitted Successfully!");
         },
         (error) => {
           console.log(error.text);
+          alert(`Error Sending Message! ${error.message || error.text || 'Unknown error'}`);
         }
       );
   };
@@ -53,7 +60,7 @@ export const Contact = (props) => {
                   get back to you as soon as possible.
                 </p>
               </div>
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
+              <form name="sentMessage" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -63,6 +70,7 @@ export const Contact = (props) => {
                         name="name"
                         className="form-control"
                         placeholder="Name *"
+                        value={name}
                         required
                         onChange={handleChange}
                       />
@@ -77,6 +85,7 @@ export const Contact = (props) => {
                         name="email"
                         className="form-control"
                         placeholder="Email *"
+                        value={email}
                         required
                         onChange={handleChange}
                       />
@@ -93,6 +102,7 @@ export const Contact = (props) => {
                         name="contactNumber"
                         className="form-control"
                         placeholder="Contact Number *"
+                        value={contactNumber}
                         required
                         onChange={handleChange}
                       />
@@ -106,8 +116,9 @@ export const Contact = (props) => {
                         id="whatsappNumber"
                         name="whatsappNumber"
                         className="form-control"
-                        placeholder="WhatsApp Number (Optional)" // Updated placeholder
-                        onChange={handleChange} // Removed required
+                        placeholder="WhatsApp Number (Optional)"
+                        value={whatsappNumber}
+                        onChange={handleChange}
                       />
                       <p className="help-block text-danger"></p>
                     </div>
@@ -122,6 +133,7 @@ export const Contact = (props) => {
                         name="city"
                         className="form-control"
                         placeholder="City *"
+                        value={city}
                         required
                         onChange={handleChange}
                       />
@@ -136,6 +148,7 @@ export const Contact = (props) => {
                         name="societyName"
                         className="form-control"
                         placeholder="Society Name *"
+                        value={societyName}
                         required
                         onChange={handleChange}
                       />
@@ -150,6 +163,7 @@ export const Contact = (props) => {
                     className="form-control"
                     rows="4"
                     placeholder="Message"
+                    value={message}
                     onChange={handleChange}
                   ></textarea>
                   <p className="help-block text-danger"></p>
@@ -221,21 +235,21 @@ export const Contact = (props) => {
               <ul>
                 <li>
                   <AnimatedComponent animationType="bounce">
-                    <a>
+                  <a href={props.data ? props.data.twitter : "loading"} target="_blank" rel="noreferrer">
                       <i className="fa fa-facebook"></i>
                     </a>
                   </AnimatedComponent>
                 </li>
                 <li>
                   <AnimatedComponent animationType="bounce">
-                    <a>
+                    <a href={props.data ? props.data.twitter : "loading"} target="_blank" rel="noreferrer">
                       <i className="fa fa-twitter"></i>
                     </a>
                   </AnimatedComponent>
                 </li>
                 <li>
                   <AnimatedComponent animationType="bounce">
-                    <a>
+                    <a href={props.data ? props.data.youtube : "loading"} target="_blank" rel="noreferrer">
                       <i className="fa fa-youtube"></i>
                     </a>
                   </AnimatedComponent>
@@ -244,7 +258,7 @@ export const Contact = (props) => {
             </div>
           </div>
           <div className="footer-links">
-            <a href="#">Privacy Policy</a> | <a href="#">T & C</a>
+            <a href="#">Privacy Policy</a> | <a href="#terms" >T & C</a>
           </div>
         </div>
       </div>

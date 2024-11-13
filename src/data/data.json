@@ -4,6 +4,8 @@
     "paragraph": "Join us in creating a community where ideas flourish, friendships thrive, and together, we shape a better tomorrow. Our platform offers a suite of features designed to help you automate day-to-day operations, from tracking maintenance requests to managing finances effortlessly. Embrace the future of community living with tools that foster collaboration, transparency, and growth, making your society a better place for everyone.",
     "heading": "Want to be a part of Bhawan Care Family ?"
   },
+
+
   "About": {
     "paragraph": "Welcome to CPS PVT LTD, your trusted partner in society management. Our mission is to revolutionize the way communities interact and manage their daily operations through innovative technology and user-friendly solutions.",
     "para2": "At CPS PVT LTD, we understand the unique challenges that come with managing a residential community. Founded by Mr. Sibasish Sahu who is an extremely talented passionate professional with extensive experience in property management and technology, we are dedicated to making community living more efficient, enjoyable, and connected.",
@@ -56,6 +58,7 @@
     ]
   },
 
+
   "Additional": [
     {
       "title": "Notice Board",
@@ -73,7 +76,7 @@
       "title": "Worker Details",
       "paragraph": "Access a verified list of domestic help and service providers within the society. Find detailed profiles, contact information, and reviews to hire reliable workers.",
       "largeImage": "img/portfolio/03-large.jpg",
-      "smallImage": "img/portfolio/03-small.jpg"
+      "smallImage": "img/portfolio/03-small.png"
     },
     {
       "title": "Society and Flats Information",
@@ -94,6 +97,8 @@
       "smallImage": "img/portfolio/06-small.jpg"
     }
   ],
+
+
 
   "Services": [
 {
@@ -137,38 +142,48 @@
   "text": "Easily organize and manage society meetings. Notify members, manage attendance, and ensure productive discussions through our intuitive app."
 } 
   ],
+
+
   "Testimonials": [
     {
       "img": "img/testimonials/01.png",
       "text": "Bhawan Care has revolutionized how we manage our society! The automated maintenance payment feature saves us so much time. It's user-friendly and efficient—exactly what we needed!",
-      "name": "Aarav Sharma"
+      "name": "Ratna Pratap Mohanty,",
+      "state": "Odisha"
     },
     {
       "img": "img/testimonials/02.png",
       "text": "I’m amazed at how Bhawan Care simplifies communication with our management. No more waiting for responses! Everything is at our fingertips now. This app is a must-have for all residents!",
-      "name": "Priya Gupta"
+      "name": "Priya Gupta,",
+      "state": "Andhra Pradesh"
     },
     {
       "img": "img/testimonials/03.jpg",
       "text": "Bhawan Care has made it so easy to book common facilities and keep track of our society's events. The app is designed with residents in mind, making it a joy to use. Highly recommended!",
-      "name": "Rajesh Mehta"
+      "name": "Pratap Singh,",
+      "state": "Haryana"
     },
     {
       "img": "img/testimonials/04.png",
       "text": "I love how Bhawan Care allows me to handle all my society needs from the comfort of my home. The communication with management has never been smoother. This app is a game changer for residents!",
-      "name": "Sneha Patel"
+      "name": " Nandita Verma,",
+      "state": "Uttar Pradesh"
     },
     {
       "img": "img/testimonials/05.png",
       "text": "As a resident, I love how Bhawan Care keeps us connected. The features for booking amenities and reporting issues are fantastic! It's great to see modern solutions for traditional challenges.",
-      "name": " Anil Verma"
+      "name": " Rohit Chavan,",
+      "state": "Maharashtra "
     },
     {
       "img": "img/testimonials/06.png",
       "text": "Bhawan Care has streamlined our society's operations. The maintenance charge automation is efficient and intuitive. I can’t imagine going back to the old way of managing things!",
-      "name": "Kavya Nair"
+      "name": "Devanshi Joshi,",
+      "state": "Gujrat "
     }
   ],
+
+
   "DownloadApp": [
     {
       "img": "img/team/appstore.gif",
@@ -181,6 +196,8 @@
       "job": "Senior Designer"
     }
   ],
+
+
   "Team": [
     {
       "img": "img/team/01.jpg",
@@ -203,14 +220,18 @@
       "job": "Project Manager"
     }
   ],
+
+
   "Contact": {
-    "address": "Plot No. - N5/123, 3rd floor, Radhamani Building, Jayadev Vihar Rd, Bhubaneswar, Odisha 751013",
-    "phone": "1800-202-2000",
-    "email": "info@cpsorg24.com",
-    "facebook": "fb.com",
-    "twitter": "twitter.com",
-    "youtube": "youtube.com"
+    "address": "Block - N5/123, 3rd floor, Radhamani Building, Jayadev Vihar Rd (Near Biju Pattnaik College), Bhubaneswar, Odisha 751013",
+    "phone": "1800-532-6114",
+    "email": "support@chaturdhaprojectsandservices.com ",
+    "facebook": "https://www.facebook.com/profile.php?id=61566381572393&sk=about",
+    "twitter": "https://x.com/bhawancare",
+    "youtube": "https://www.youtube.com/channel/UCP7yeDT7mAeOJlb8CH_Sbmw"
   },
+
+
   "Common": {
     "Admin": [
       {
@@ -301,6 +322,8 @@
       }
     ]
   },
+
+
   "Features": [
     {
       "icon": "fa fa-building",
@@ -327,6 +350,9 @@
       "route": "security"
     }
   ],
+
+
+
   "AllFeature": [
     {
       "title": "Maintenance Charge",
@@ -366,6 +392,8 @@
     }
     
   ],
+
+
   "SocietyInfo": [
 {
   "title1": "Notice Board",
@@ -412,6 +440,8 @@
   "text1": "Stay informed about society details, including historical data, events, and important updates. Access all society-related information with just a few taps on the app."
 }
   ],
+
+
   "Navigation": [
     {
       "name": "Management & Services",
@@ -422,8 +452,5 @@
       "subFeatures": ["Notice Board", "Emergency Contacts", "External workers", "Laundry", "Corpus Fund", "Local Programs", "Society Information", "Society Rule", "Internal Worker", "Intercom Details", "Holidays", "Society Members History", "Society Bank Details"]
     }
   ]
-
-  
-  
   }
 

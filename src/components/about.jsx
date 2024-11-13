@@ -9,7 +9,7 @@ export const About = (props) => {
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <AnimatedComponent animationType="scaleUp">
-              <img src="img/about.jpg" className="img-responsive" alt="About" />
+              <img src="img/about.png" className="img-responsive" alt="About" />
             </AnimatedComponent>
           </div>
           <div className="col-xs-12 col-md-6">

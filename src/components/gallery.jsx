@@ -50,7 +50,7 @@ export const Gallery = () => {
     { logo: '/img/certificates/GDPR.png' },
     { logo: '/img/certificates/PCI.png' },
     { logo: '/img/certificates/soc-2.png' },
-    { logo: '/img/certificates/cmmi.png' },
+    // { logo: '/img/certificates/cmmi.png' },
   ];
 
   return (
