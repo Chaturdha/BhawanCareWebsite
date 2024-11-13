@@ -1,5 +1,6 @@
 import React from "react";
 import AnimatedComponent from "./animation";
+import { Contact } from "./contact";
 
 export const AboutPage = ({ data }) => {
   return (
@@ -8,7 +9,7 @@ export const AboutPage = ({ data }) => {
         {/* Image Section */}
         <div className="image-container">
           <img
-            src="img/about.jpg"
+            src="img/about.png"
             className="img-responsive"
             alt="About"
             style={{ width: "100%", height: "auto", borderRadius: "10px" }}
@@ -81,7 +82,7 @@ export const AboutPage = ({ data }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div>          
     </div>
   );
 };

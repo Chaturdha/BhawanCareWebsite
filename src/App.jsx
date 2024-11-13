@@ -23,6 +23,9 @@ import { AboutContact } from "./components/aboutContact";
 import { Additional } from "./components/additionalFeatures";
 import { NewTestimonial } from "./components/newTestimonial";
 import { AboutPage } from "./components/aboutPage";
+import { Career } from "./components/career";
+import { ContactUs } from "./components/mailConfig";
+import TermsAndConditions from "./components/termsConditions";
 
 // Component to handle hash-based scrolling
 const ScrollToSection = () => {
@@ -60,6 +63,7 @@ const App = () => {
             path="/"
             element={
               <>
+                {/* <ContactUs /> */}
                 <Header data={landingPageData.Header} />
                 <About data={landingPageData.About} />
                 <Choose data={landingPageData.Services} />
@@ -80,6 +84,7 @@ const App = () => {
               </>
             }
           />
+          <Route path="/terms" element={<TermsAndConditions/>} />
           <Route
             path="/features"
             element={
@@ -98,11 +103,21 @@ const App = () => {
             }
           />
 
+          <Route
+            path="/career"
+            element={
+              <Career
+                data={landingPageData.About} // Pass the data prop to AboutPage
+              />
+            }
+          />
+
           <Route path="/common/:section" element={<Common />} />
           <Route path="/allFeature" element={<AllFeature
             data={landingPageData.AllFeature}
             societyInfo={landingPageData.SocietyInfo} />} />
         </Routes>
+
       </div>
     </Router>
   );

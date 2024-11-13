@@ -65,6 +65,7 @@ export const NewTestimonial = ({ data }) => {
               <div className="testimonial-content-wrapper">
                 <p className="testimonial-text">"{d.text}"</p>
                 <div className="testimonial-author">- {d.name}</div>
+                <div className="testimonial-state"> {d.state}</div>
               </div>
             </div>
           </div>

@@ -58,7 +58,7 @@ export const Header = (props) => {
             <div className="image-large-wrapper">
               <div className="image-item large">
                 <img
-                  src="/img/header/family.jpg"
+                  src="/img/header/family.png"
                   alt="Main Product"
                   className="main-image"
                 />
@@ -78,7 +78,7 @@ export const Header = (props) => {
               }}
             >
               <img
-                src="/img/header/small1.jpg"
+                src="/img/header/small1.png"
                 alt="Product 2"
                 className="small-image"
               />
@@ -94,7 +94,7 @@ export const Header = (props) => {
               }}
             >
               <img
-                src="/img/header/small2.jpg"
+                src="/img/header/small2.png"
                 alt="Product 3"
                 className="small-image"
               />
@@ -110,7 +110,7 @@ export const Header = (props) => {
               }}
             >
               <img
-                src="/img/header/small3.jpg"
+                src="/img/header/small3.png"
                 alt="Product 4"
                 className="small-image"
               />

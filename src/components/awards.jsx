@@ -6,7 +6,7 @@ export const Awards = () => {
     { name: 'Cities', targetCount: 25 },
     { name: 'Societies', targetCount: 50 },
     { name: 'Bhawan Care Users', targetCount: 1000},
-    { name: 'Associate Industries', targetCount: 60 },
+    { name: 'Associate Industries', targetCount: 10 },
   ];
 
   const [currentCounts, setCurrentCounts] = useState(

@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Modal from "react-modal";
-import { FaTimes } from 'react-icons/fa'; // Import FontAwesome icon
+import { FaTimes } from 'react-icons/fa'; 
+import emailjs from '@emailjs/browser';
 
 Modal.setAppElement('#root');
 
-const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) => {
+const ContactModal = ({ isOpen, onRequestClose }) => {
+  const form = useRef(); // Use ref for the form
+
   useEffect(() => {
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap';
@@ -15,6 +18,30 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
       document.head.removeChild(link);
     };
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // Here you can handle state changes if required
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('service_4211m8l', 'template_5agje9l', form.current, {
+        publicKey: '7JbFWgAbd51t2TcEH',
+      })
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Submitted Successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          alert(`Error Sending Message! ${error.message || error.text || 'Unknown error'}`);
+        }
+      );
+  };
 
   return (
     <Modal
@@ -66,7 +93,7 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
       <p style={{ textAlign: 'center', color: '#94664b', marginBottom: '20px' }}>
         Please fill in your details to request a demo.
       </p>
-      <form name="sentMessage" validate onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <form ref={form} name="sentMessage" onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <div className="row">
           <div className="col-md-6">
             <div className="form-group">
@@ -86,7 +113,6 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
           <div className="col-md-6">
@@ -107,7 +133,6 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
         </div>
@@ -130,7 +155,6 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
           <div className="col-md-6">
@@ -150,7 +174,6 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
         </div>
@@ -173,7 +196,6 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
           <div className="col-md-6">
@@ -194,15 +216,33 @@ const ContactModal = ({ isOpen, onRequestClose, handleChange, handleSubmit }) =>
                   color: '#94664b',
                 }}
               />
-              <p className="help-block text-danger"></p>
             </div>
           </div>
         </div>
 
-        {/* Centered Submit Button */}
+        {/* Message input */}
+        <div className="form-group">
+          <textarea
+            id="message"
+            name="message"
+            className="form-control"
+            placeholder="Message (Optional)"
+            onChange={handleChange}
+            style={{
+              padding: '10px',
+              borderRadius: '8px',
+              border: '1px solid #FFF2C1',
+              fontSize: '12px',
+              color: '#94664b',
+              minHeight: '100px',
+            }}
+          />
+        </div>
+
+        {/* Submit Button */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <button
-            type="submit"  // Change onClick to type="submit" to trigger form submission
+          <button
+            type="submit"  // Use type="submit" to trigger form submission
             className="btn btn-custom btn-lg"
             style={{
               padding: '10px 20px',
