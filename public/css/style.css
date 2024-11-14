@@ -1711,21 +1711,19 @@ a:focus,
 
 /* Career Page */
 .career-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   margin: 20px;
   padding: 100px;
-  /* border: 1px solid #ccc;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: auto; */
 }
 
 .career-image {
-  /* display: block; */
   margin: 0 auto;
-  /* max-width: 50%;  */
-  /* height: 400px;  */
   width: 100%;
+  height: 600px;
   object-fit: cover;
   margin-bottom: 20px;
   border-radius: 8px;
@@ -1754,6 +1752,73 @@ a:focus,
 
 .career-button:hover {
   background-color: #0056b3;
+}
+
+
+
+.career-text {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+
+.apply-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.join-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+@media (max-width: 1200px) {
+  .career-container {
+      padding-top: 140px; /* Adjust the value as needed */
+  }
+}
+
+@media (max-width: 991px) {
+  .career-container {
+      /* padding-top: 140px;  */
+      margin-top: 70px;
+  }
+}
+
+@media (max-width: 980px) {
+  .career-container {
+      /* padding-top: 140px;  */
+      margin-top: 70px;
+  }
+}
+
+@media (max-width: 940px) {
+  .career-container {
+      /* padding-top: 140px;  */
+      margin-top: 70px;
+  }
+}
+
+@media (max-width: 800px) {
+  .career-container {
+      /* padding-top: 120px;  */
+      margin-top: 50px;
+  }
+}
+
+@media (max-width: 720px) {
+  .career-container {
+      padding-top: 60px; /* Further increase for narrower screens */
+  }
+}
+
+/* You can add more media queries for other breakpoints as needed */
+@media (max-width: 600px) {
+  .career-container {
+      padding-top: 80px; /* Adjust as needed */
+  }
 }
 
 

@@ -258,7 +258,7 @@ export const Contact = (props) => {
             </div>
           </div>
           <div className="footer-links">
-            <a href="#">Privacy Policy</a> | <a href="#terms" >T & C</a>
+            <a href="#privacy">Privacy Policy</a> | <a href="#terms" >T & C</a>
           </div>
         </div>
       </div>
