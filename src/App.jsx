@@ -26,6 +26,7 @@ import { AboutPage } from "./components/aboutPage";
 import { Career } from "./components/career";
 import { ContactUs } from "./components/mailConfig";
 import TermsAndConditions from "./components/termsConditions";
+import PrivacyPolicy from "./components/privacyPolicy";
 
 // Component to handle hash-based scrolling
 const ScrollToSection = () => {
@@ -85,6 +86,7 @@ const App = () => {
             }
           />
           <Route path="/terms" element={<TermsAndConditions/>} />
+          <Route path="/privacy" element={<PrivacyPolicy/>} />
           <Route
             path="/features"
             element={
