@@ -52,7 +52,7 @@ const FAQPage = () => {
                 'We implement robust security measures, including data encryption and secure access protocols, to protect your personal information at all times. We are committed to maintaining the confidentiality and integrity of your data, complying with all relevant data protection regulations. Your trust and privacy are of utmost importance to us, and we continually strive to ensure your data remains safe and secure.',
         },
     ];
-    
+
 
     const [selectedQuestion, setSelectedQuestion] = useState(null);
 
