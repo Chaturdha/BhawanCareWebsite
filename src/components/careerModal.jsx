@@ -1,101 +1,99 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Modal from "react-modal";
 import { FaTimes } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
+import { postCv } from './../api/Api';
 
 Modal.setAppElement('#root');
 
 const CareerModal = ({ isOpen, onRequestClose }) => {
-    const form = useRef();
-    const [formData, setFormData] = useState({
-        user_name: '',
-        user_email: '',
-        user_contactNumber: '',
-        user_address: '',
-        user_state: '',
-        user_city: '',
-        user_pincode: '',
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        contact_number: '',
+        address: '',
+        state: '',
+        city: '',
+        pincode: '',
         cv: null,
     });
-
-    const [file, setFile] = useState(null);
-    const [downloadLink, setDownloadLink] = useState(null); // State to hold the downloadable link
-
+    const [loading, setLoading] = useState(false);
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setData({ ...data, [name]: value });
     };
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
-    const convertFileToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]); // Removing 'data:application/pdf;base64,' part
-            reader.onerror = (error) => reject(error);
-        });
-    };
-
-    const createDownloadLink = (base64File) => {
-        const byteCharacters = atob(base64File);
-        const byteArray = new Uint8Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteArray[i] = byteCharacters.charCodeAt(i);
-        }
-        const blob = new Blob([byteArray], { type: "application/octet-stream" });
-        const url = URL.createObjectURL(blob);
-        setDownloadLink(url); // Set the download link state
+        setData({ ...data, cv: e.target.files[0] });
     };
 
     const sendEmail = async (e) => {
         e.preventDefault();
-        if (!file) {
-            alert("Please attach a file before submitting.");
+    
+        // Validation checks
+        if (!data.name) {
+            alert("Please enter your name.");
+            return;
+        } else if (!data.email) {
+            alert("Please enter your email.");
+            return;
+        } else if (!data.contact_number) {
+            alert("Please enter your contact number.");
+            return;
+        } else if (!data.address) {
+            alert("Please enter your address.");
+            return;
+        } else if (!data.state) {
+            alert("Please enter your state.");
+            return;
+        } else if (!data.city) {
+            alert("Please enter your city.");
+            return;
+        } else if (!data.pincode) {
+            alert("Please enter your pincode.");
+            return;
+        } else if (!data.cv) {
+            alert("Please upload your CV.");
             return;
         }
-
+        setLoading(true);
+    
         try {
-            const base64File = await convertFileToBase64(file);
+          const formData =new FormData()
+          formData.append("name", data?.name)
+          formData.append("email", data?.email)
 
-            // Send email with the base64 file as the 'cv' variable
-            emailjs.send('service_4211m8l', 'template_y5lo1uw', {
-                user_name: formData.user_name,
-                user_email: formData.user_email,
-                user_contactNumber: formData.user_contactNumber,
-                user_address: formData.user_address,
-                user_state: formData.user_state,
-                user_city: formData.user_city,
-                user_pincode: formData.user_pincode,
-                // cv: base64File, // Pass base64 file content here
-            }, '7JbFWgAbd51t2TcEH')
-                .then(() => {
-                    console.log('SUCCESS!');
-                    alert("Submitted Successfully!");
-                    createDownloadLink(base64File); // Create a downloadable link
-                })
-                .catch((error) => {
-                    console.error('FAILED...', error);
-                    alert(`Error Sending Message! ${error.message || error.text || 'Unknown error'}`);
+          formData.append("contact_number", data?.contact_number)
+
+          formData.append("address", data?.address)
+          formData.append("state", data?.state)
+          formData.append("city", data?.city)
+          formData.append("pincode", data?.pincode)
+          formData.append("cv", data?.cv)
+          console.log("chk",formData)
+
+            const response = await postCv(formData);
+            if(response){
+                setData({
+                    name: '',
+                    email: '',
+                    contact_number: '',
+                    address: '',
+                    state: '',
+                    city: '',
+                    pincode: '',
+                    cv: null,
                 });
+            onRequestClose();
+            alert("Submitted Successfully! Thank you for applying. We’ll review and notify you by email. Keep in touch!");
+            }
         } catch (error) {
-            console.error("Error converting file to base64:", error);
-            alert("Error processing the file. Please try again.");
+            console.error("Error processing the form submission:", error?.response?.data);
+            alert(error?.response?.data);
+        }finally {
+            setLoading(false);
         }
     };
-
-    useEffect(() => {
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap';
-        document.head.appendChild(link);
-
-        return () => {
-            document.head.removeChild(link);
-        };
-    }, []);
-
+     
     return (
         <Modal
             isOpen={isOpen}
@@ -140,31 +138,31 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
             <p style={{ textAlign: 'center', marginBottom: '20px' }}>
                 Please fill in your details to request a demo.
             </p>
-            <form ref={form} onSubmit={sendEmail} method="post" encType="multipart/form-data" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <form onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 {/* Form Fields */}
                 <div className="row">
                     <div className="col-md-6">
                         <input
                             type="text"
-                            name="user_name"
+                            name="name"
                             className="form-control"
                             placeholder="Name *"
-                            required
-                            value={formData.user_name}
+                            value={data.name}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                     <div className="col-md-6">
                         <input
                             type="email"
-                            name="user_email"
+                            name="email"
                             className="form-control"
                             placeholder="Email *"
-                            required
-                            value={formData.user_email}
+                            value={data.email}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                 </div>
@@ -173,25 +171,25 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
                     <div className="col-md-6">
                         <input
                             type="text"
-                            name="user_contactNumber"
+                            name="contact_number"
                             className="form-control"
                             placeholder="Contact Number *"
-                            required
-                            value={formData.user_contactNumber}
+                            value={data.contact_number}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                     <div className="col-md-6">
                         <input
                             type="text"
-                            name="user_address"
+                            name="address"
                             className="form-control"
                             placeholder="Address *"
-                            required
-                            value={formData.user_address}
+                            value={data.address}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                 </div>
@@ -200,37 +198,37 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
                     <div className="col-md-4">
                         <input
                             type="text"
-                            name="user_state"
+                            name="state"
                             className="form-control"
                             placeholder="State *"
-                            required
-                            value={formData.user_state}
+                            value={data.state}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                     <div className="col-md-4">
                         <input
                             type="text"
-                            name="user_city"
+                            name="city"
                             className="form-control"
                             placeholder="City *"
-                            required
-                            value={formData.user_city}
+                            value={data.city}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                     <div className="col-md-4">
                         <input
                             type="text"
-                            name="user_pincode"
+                            name="pincode"
                             className="form-control"
                             placeholder="Pincode *"
-                            required
-                            value={formData.user_pincode}
+                            value={data.pincode}
                             onChange={handleChange}
                             style={inputStyle}
+                            required
                         />
                     </div>
                 </div>
@@ -245,6 +243,7 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
                             onChange={handleFileChange}
                             accept=".pdf,.docx,.jpg,.png"
                             style={inputStyle}
+                            required
                         />
                     </div>
                 </div>
@@ -253,6 +252,7 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
                     <button
                         type="submit"
                         className="btn btn-custom btn-lg"
+                        disabled={loading}
                         style={{
                             padding: '10px 20px',
                             borderRadius: '10px',
@@ -263,19 +263,9 @@ const CareerModal = ({ isOpen, onRequestClose }) => {
                             fontSize: '16px',
                         }}
                     >
-                        Send
-                    </button>
+{loading ? "Sending..." : "Send"}                    </button>
                 </div>
             </form>
-
-            {/* Show the downloadable link after submission */}
-            {/* {downloadLink && (
-                <div style={{ marginTop: '20px', textAlign: 'center' }}>
-                    <a href={downloadLink} download="cv-file" style={{ color: '#4CAF50', textDecoration: 'none' }}>
-                        Download your CV file
-                    </a>
-                </div>
-            )} */}
         </Modal>
     );
 };
