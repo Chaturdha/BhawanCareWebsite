@@ -202,14 +202,14 @@ export const Contact = (props) => {
 
             {/* App Store and Play Store icons */}
             <div className="button-row">
-              <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer">
+              <a href=" https://play.google.com/store/apps/details?id=com.bhawancare.bhawancare" target="_blank" rel="noreferrer">
                 <img
                   src="../img/apple-logo.png" // Replace with a local asset if needed
                   alt="App Store"
                   className="store-icon-img"
                 />
               </a>
-              <a href="https://play.google.com/store" target="_blank" rel="noreferrer">
+              <a href=" https://play.google.com/store/apps/details?id=com.bhawancare.bhawancare" target="_blank" rel="noreferrer">
                 <img
                   src="../img/playstore.png" // Replace with a local asset if needed
                   alt="Play Store"
