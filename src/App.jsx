@@ -26,6 +26,7 @@ import { AboutPage } from "./components/aboutPage";
 import { Career } from "./components/career";
 import { ContactUs } from "./components/mailConfig";
 import TermsAndConditions from "./components/termsConditions";
+
 import './index.css'
 import PrivacyPolicy from "./components/privacyPolicy";
 
