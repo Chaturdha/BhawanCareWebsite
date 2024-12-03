@@ -233,7 +233,7 @@ export const Contact = (props) => {
               <ul>
                 <li>
                   <AnimatedComponent animationType="bounce">
-                  <a href={props.data ? props.data.twitter : "loading"} target="_blank" rel="noreferrer">
+                  <a href={props.data ? props.data.facebook : "loading"} target="_blank" rel="noreferrer">
                       <i className="fa fa-facebook"></i>
                     </a>
                   </AnimatedComponent>
