@@ -1,50 +1,48 @@
 import { useState } from "react";
-import emailjs from '@emailjs/browser';
 import React from "react";
 import AnimatedComponent from "./animation";
+import { postContact } from './../api/Api';
 
 const initialState = {
   name: "",
   email: "",
   message: "",
-  contactNumber: "",
-  whatsappNumber: "",
+  contact_number: "",
+  whatsapp_number: "",
   city: "",
-  societyName: "",
+  society_name: "",
 };
 
 export const Contact = (props) => {
-  const [{ name, email, message, contactNumber, whatsappNumber, city, societyName }, setState] = useState(initialState);
+  const [formState, setFormState] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
+    setFormState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const clearState = () => setState({ ...initialState });
+  const clearState = () => setFormState({ ...initialState });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, message, contactNumber, whatsappNumber, city, societyName);
+    // Use FormData to send data
+    const formData = new FormData();
+    Object.keys(formState).forEach((key) => {
+      formData.append(key, formState[key]);
+    });
 
-    emailjs
-      .sendForm(
-        "service_4211m8l", // replace with your EmailJS service ID
-        "template_5agje9l", // replace with your EmailJS template ID
-        e.target, // form element
-        "7JbFWgAbd51t2TcEH" // replace with your EmailJS public key
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          // clearState(); 
-          alert("Submitted Successfully!");
-        },
-        (error) => {
-          console.log(error.text);
-          alert(`Error Sending Message! ${error.message || error.text || 'Unknown error'}`);
-        }
-      );
+    try {
+      const response = await postContact(formData);
+      if (response) { // Check response success
+        alert('Form submitted successfully!');
+        clearState();
+      } else {
+        alert('Failed to submit the form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -70,7 +68,7 @@ export const Contact = (props) => {
                         name="name"
                         className="form-control"
                         placeholder="Name *"
-                        value={name}
+                        value={formState?.name}
                         required
                         onChange={handleChange}
                       />
@@ -85,7 +83,7 @@ export const Contact = (props) => {
                         name="email"
                         className="form-control"
                         placeholder="Email *"
-                        value={email}
+                        value={formState?.email}
                         required
                         onChange={handleChange}
                       />
@@ -99,10 +97,10 @@ export const Contact = (props) => {
                       <input
                         type="text"
                         id="contactNumber"
-                        name="contactNumber"
+                        name="contact_number"
                         className="form-control"
                         placeholder="Contact Number *"
-                        value={contactNumber}
+                        value={formState?.contact_number}
                         required
                         onChange={handleChange}
                       />
@@ -114,10 +112,10 @@ export const Contact = (props) => {
                       <input
                         type="text"
                         id="whatsappNumber"
-                        name="whatsappNumber"
+                        name="whatsapp_number"
                         className="form-control"
                         placeholder="WhatsApp Number (Optional)"
-                        value={whatsappNumber}
+                        value={formState?.whatsapp_number}
                         onChange={handleChange}
                       />
                       <p className="help-block text-danger"></p>
@@ -133,7 +131,7 @@ export const Contact = (props) => {
                         name="city"
                         className="form-control"
                         placeholder="City *"
-                        value={city}
+                        value={formState?.city}
                         required
                         onChange={handleChange}
                       />
@@ -145,10 +143,10 @@ export const Contact = (props) => {
                       <input
                         type="text"
                         id="societyName"
-                        name="societyName"
+                        name="society_name"
                         className="form-control"
                         placeholder="Society Name *"
-                        value={societyName}
+                        value={formState?.society_name}
                         required
                         onChange={handleChange}
                       />
@@ -163,7 +161,7 @@ export const Contact = (props) => {
                     className="form-control"
                     rows="4"
                     placeholder="Message"
-                    value={message}
+                    value={formState?.message}
                     onChange={handleChange}
                   ></textarea>
                   <p className="help-block text-danger"></p>
@@ -235,7 +233,7 @@ export const Contact = (props) => {
               <ul>
                 <li>
                   <AnimatedComponent animationType="bounce">
-                  <a href={props.data ? props.data.twitter : "loading"} target="_blank" rel="noreferrer">
+                  <a href={props.data ? props.data.facebook : "loading"} target="_blank" rel="noreferrer">
                       <i className="fa fa-facebook"></i>
                     </a>
                   </AnimatedComponent>
